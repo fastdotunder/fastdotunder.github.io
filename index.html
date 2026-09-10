@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Using the event properties</title>
+        <title>Drawing Tool</title>
         <style>
-        .beard {
+        .dot {
               	background: black;
          		width: 5px;
          		height: 5px;
@@ -13,28 +13,35 @@
          		top: 80px;
          		left: 15px;
          	}
+            #board {
+                width: 100vw;
+                height: 100vh;
+                background-color: #fafafa;
+                position: relative;
+            }
         </style>
     </head>
     <body>
     
-    <img id="face" src="https://www.kasandbox.org/programming-images/creatures/Winston.png">
-    <div id="message"></div>
+    <div id="board"></div>
     
     <script>
-    // 1. Find and store the element we want to listen to events on.
-    var face = document.getElementById("face");
-    // 2. Define the function that will respond to the event.
+
+    var board = document.getElementById("board");
+
     var onMouseMove = function(event) {
+        if (event.buttons !== 1) return;
         console.log(event);
-        document.getElementById("message").textContent += "mooove ";         var beard = document.createElement("div");
-        beard.className = "beard";
-        document.body.appendChild(beard);
-        beard.style.top = event.clientY + "px";
-        beard.style.left = event.clientX + "px";
+        var board = document.createElement("div");
+        board.className = "dot";
+        document.body.appendChild(board);
+        board.style.top = event.clientY + "px";
+        board.style.left = event.clientX + "px";
         
     };
-    // 3. Add the event listener for the element and function
-    face.addEventListener("mousemove", onMouseMove);
+
+    board.addEventListener("mousemove", onMouseMove);
+    board.addEventListener("mousedown", onMouseMove);
     </script>
     </body>
 </html>
